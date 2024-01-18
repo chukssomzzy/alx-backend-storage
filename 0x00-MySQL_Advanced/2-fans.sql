@@ -3,7 +3,7 @@
 -- SELECT COUNT GROUP ORDER 
 SELECT
 origin, 
-COUNT(fans) as nb_fans 
+SUM(fans) as nb_fans 
 FROM
 metal_bands 
 GROUP BY origin 
