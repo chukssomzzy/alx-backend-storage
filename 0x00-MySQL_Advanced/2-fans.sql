@@ -2,7 +2,7 @@
 
 -- SELECT COUNT GROUP ORDER 
 SELECT
-origins, 
+origin, 
 COUNT(fans) as nb_fans 
 FROM
 metal_bands 
