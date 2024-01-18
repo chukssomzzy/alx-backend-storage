@@ -3,7 +3,7 @@
 -- Is valid email 
 DELIMITER $$
 CREATE TRIGGER isValidEmail
-UPDATE AFTER ON users 
+AFTER UPDATE ON users 
 FOR EACH ROW 
   BEGIN
     IF NEW.email AND OLD.email != NEW.email
