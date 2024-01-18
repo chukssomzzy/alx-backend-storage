@@ -2,7 +2,7 @@
 
 -- decrease quantity after order 
 CREATE TRIGGER
-IF NOT EXISTS decrese_items_quantity
+decrese_items_quantity
 INSERT AFTER ON orders
 FOR EACH ROWS
 BEGIN
