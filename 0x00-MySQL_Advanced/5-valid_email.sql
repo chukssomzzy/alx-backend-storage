@@ -8,6 +8,6 @@ FOR EACH ROW
   BEGIN
     IF NEW.email AND OLD.email != NEW.email
       THEN
-      SET NEW.valid_email = 0;
+      SET OLD.valid_email = 0;
     END IF;
   END$$
