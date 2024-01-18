@@ -11,10 +11,10 @@ BEGIN
 
   SELECT quantity INTO uQuantity
   FROM items 
-  WHERE items.name = NEW.name;
+  WHERE items.name = NEW.item_name;
 
   SET uQuantity = uQuantity - NEW.number;
 
   UPDATE items SET quantity = uQuantity 
-  WHERE items.name = NEW.name;
+  WHERE items.name = NEW.item_name;
 END$$
