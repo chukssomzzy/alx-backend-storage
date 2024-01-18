@@ -1,10 +1,11 @@
 -- Create a trigger 
 
--- decrease quantity after order 
+-- decrease quantity after order
+DELIMITER $$
 CREATE TRIGGER
 decrese_items_quantity
 AFTER INSERT ON orders
-FOR EACH ROWS
+FOR EACH ROW
 BEGIN
   DECLARE uQuantity INT; 
 
@@ -16,4 +17,4 @@ BEGIN
 
   UPDATE items SET quantity = uQuantity 
   WHERE items.name = NEW.name;
-END
+END$$
