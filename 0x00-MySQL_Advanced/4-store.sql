@@ -3,7 +3,7 @@
 -- decrease quantity after order 
 CREATE TRIGGER
 decrese_items_quantity
-INSERT AFTER ON orders
+AFTER INSERT ON orders
 FOR EACH ROWS
 BEGIN
   DECLARE uQuantity INT; 
