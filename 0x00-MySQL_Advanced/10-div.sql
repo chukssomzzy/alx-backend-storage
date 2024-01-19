@@ -9,5 +9,5 @@ BEGIN
     THEN
     RETURN 0;
   END IF
-  RETURN a DIV b;
+  RETURN (a DIV b);
 END$$
