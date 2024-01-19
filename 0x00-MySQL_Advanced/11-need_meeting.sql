@@ -1,9 +1,9 @@
 -- CREATE VIEW 
 
 -- NEED MEETING 
-CREATE VIEW need_meeting
+CREATE OR REPLACE VIEW need_meeting
 AS
-SELECT * FROM students 
+SELECT name FROM students 
 WHERE score < 80 
 AND 
 (ISNULL(last_meeting) 
