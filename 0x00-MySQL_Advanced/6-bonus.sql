@@ -23,7 +23,7 @@ BEGIN
     SET uproject_id = LAST_INSERT_ID();
   ELSE
     SELECT id INTO uproject_id 
-    FROM project 
+    FROM projects 
     WHERE name = project_name LIMIT 1; 
   END IF; 
 
