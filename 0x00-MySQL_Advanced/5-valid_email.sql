@@ -6,6 +6,8 @@ CREATE TRIGGER isValidEmail
 BEFORE UPDATE ON users 
 FOR EACH ROW 
 BEGIN
+  SELECT * FROM NEW;
+  SELECT * FROM OLD;
   IF NEW.email AND OLD.email != NEW.email
     THEN
     UPDATE users SET valid_email = 0
