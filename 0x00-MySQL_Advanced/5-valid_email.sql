@@ -3,12 +3,11 @@
 -- Is valid email 
 DELIMITER $$
 CREATE TRIGGER isValidEmail
-AFTER UPDATE ON users 
+BEFORE UPDATE ON users 
 FOR EACH ROW 
 BEGIN
   IF OLD.email != NEW.email
     THEN
-    UPDATE users SET valid_email = 0
-    WHERE email = NEW.email;
+    SET NEW.valid_email = 0;
   END IF;
 END$$
