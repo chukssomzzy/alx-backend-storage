@@ -1,4 +1,4 @@
 -- indexing 
 
 -- Create an index with the first character of names 
-CREATE INDEX first_letter ON names (name(1));
+CREATE INDEX idx_name_first ON names (name(1));
