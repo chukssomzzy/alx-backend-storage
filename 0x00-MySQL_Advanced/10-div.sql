@@ -5,9 +5,9 @@ DELIMITER $$
 CREATE FUNCTION SafeDiv(a INT,b INT)
 RETURNS FLOAT DETERMINISTIC
 BEGIN
-  IF b = 0 or ISNULL(b) or ISNULL(a)
+  IF b = 0 or ISNULL(b)
     THEN
     RETURN 0;
   END IF
-  RETURN a DIV b;
+  RETURN (a / b);
 END$$
