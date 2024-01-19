@@ -1,0 +1,16 @@
+-- SAFE DIV 
+
+-- RETURN a / b or if b == 0 0
+DELIMITER $$
+CREATE FUNCTION SafeDiv(IN a INT, IN b INT)
+RETURN INT DETERMINISTIC
+LANGUAGE SQL
+COMMENT 'div a, b and return result safely'
+DETERMINISTIC
+NO SQL
+SQL SECURITY DEFINER
+BEGIN
+  IF b = 0
+    THEN
+    RETURN 0;
+  RETURN (a / b)$$
