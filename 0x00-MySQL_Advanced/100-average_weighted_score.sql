@@ -20,7 +20,7 @@ BEGIN
   (users.id = corrections.user_id)
   INNER JOIN projects
   ON
-  (corrections.project_id = projects.id);
+  (corrections.project_id = projects.id)
   WHERE users.id = user_id;
 
   UPDATE users SET average_score = (weightSum / uweight) 
