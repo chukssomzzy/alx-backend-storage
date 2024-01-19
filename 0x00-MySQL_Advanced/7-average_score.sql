@@ -1,6 +1,7 @@
 -- Compute Average Score 
 
---  Average Score For user 
+--  Average Score For user
+DELIMITER $$
 CREATE PROCEDURE computeAverageScoreForUser(IN user_id INT)
 LANGUAGE SQL
 COMMENT 'Average corrections score' 
@@ -17,4 +18,4 @@ BEGIN
   UPDATE users 
   SET average_score = u_avg_score
   WHERE id = user_id; 
-END;
+END$$
