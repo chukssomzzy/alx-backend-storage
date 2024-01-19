@@ -9,4 +9,5 @@ BEGIN
     THEN
     RETURN 0;
   RETURN (a / b);
+  END IF;
 END$$
