@@ -23,7 +23,7 @@ BEGIN
   (corrections.project_id = projects.id);
   WHERE users.id = user_id;
 
-  UPDATE users SET average_score = (uweight / weightSum) 
+  UPDATE users SET average_score = (weightSum / uweight) 
   WHERE 
   id = user_id; 
 END$$
