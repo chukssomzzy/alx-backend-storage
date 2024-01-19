@@ -13,4 +13,5 @@ BEGIN
   IF b = 0
     THEN
     RETURN 0;
-  RETURN (a / b)$$
+  RETURN (a / b);
+END$$
