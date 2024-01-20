@@ -36,12 +36,12 @@ SET @user_jeanne = LAST_INSERT_ID();
 INSERT INTO projects (name, weight) VALUES ("C is fun", 1);
 SET @project_c = LAST_INSERT_ID();
 
-INSERT INTO projects (name, weight) VALUES ("Python is cool", 2);
-SET @project_py = LAST_INSERT_ID();
+-- INSERT INTO projects (name, weight) VALUES ("Python is cool", 2);
+-- SET @project_py = LAST_INSERT_ID();
 
 
 INSERT INTO corrections (user_id, project_id, score) VALUES (@user_bob, @project_c, 80);
-INSERT INTO corrections (user_id, project_id, score) VALUES (@user_bob, @project_py, 96);
+-- INSERT INTO corrections (user_id, project_id, score) VALUES (@user_bob, @prkoject_py, 96);
 
 INSERT INTO corrections (user_id, project_id, score) VALUES (@user_jeanne, @project_c, 91);
-INSERT INTO corrections (user_id, project_id, score) VALUES (@user_jeanne, @project_py, 73);
+-- INSERT INTO corrections (user_id, project_id, score) VALUES (@user_jeanne, @project_py, 73);
