@@ -37,5 +37,6 @@ BEGIN
   IF i >= len
     THEN
     LEAVE loop_label;
-  END LOOP loop_label;
+  END IF;
+END LOOP loop_label;
 END$$ 
