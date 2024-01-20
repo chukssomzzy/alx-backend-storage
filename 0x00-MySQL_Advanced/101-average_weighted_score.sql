@@ -19,7 +19,7 @@ BEGIN
   SELECT COUNT(id) INTO len FROM users;
 
   label1: LOOP
-  SELECT id INTO user_id FROM users LIMIT i, (i + 1);
+  SELECT id INTO user_id FROM users LIMIT i, i + 1;
 
   SELECT SUM(projects.weight * corrections.score) INTO weightSum FROM users 
   INNER JOIN corrections
@@ -31,6 +31,8 @@ BEGIN
   UPDATE users SET average_score = (weightSum / uweight) 
   WHERE 
   id = user_id;
+
+  SET i = i + 1;
   IF i >= len
     THEN
     LEAVE label1;
