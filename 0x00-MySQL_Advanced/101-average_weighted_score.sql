@@ -2,7 +2,7 @@
 
 -- Stored procedure
 DELIMITER $$ 
-CREATE PROCEDURE ComputeAverageWeightedScoreForUser()
+CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
 LANGUAGE SQL
 COMMENT 'Calculate average weighted score for a user'
 NOT DETERMINISTIC
