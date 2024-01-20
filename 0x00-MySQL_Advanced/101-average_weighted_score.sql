@@ -1,10 +1,10 @@
--- COMPUTE WEIGHTED AVERAGR
+-- COMPUTE WEIGHTED AVERAGE of all users
 
 -- Stored procedure
 DELIMITER $$ 
 CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
 LANGUAGE SQL
-COMMENT 'Calculate average weighted score for a user'
+COMMENT 'Calculate average weighted score for a users'
 NOT DETERMINISTIC
 SQL SECURITY DEFINER
 CONTAINS SQL
