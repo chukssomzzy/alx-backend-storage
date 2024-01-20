@@ -18,9 +18,9 @@ BEGIN
   SELECT SUM(WEIGHT) INTO uweight FROM projects;
   SELECT COUNT(id) INTO len FROM users;
 
-  label1: LOOP
+  loop_label: LOOP
   SET i = j; 
-  set j = j + 1;
+  SET j = j + 1;
   SELECT id INTO user_id FROM users LIMIT i, j;
 
   SELECT SUM(projects.weight * corrections.score) INTO weightSum FROM users 
@@ -36,6 +36,6 @@ BEGIN
 
   IF i >= len
     THEN
-    LEAVE label1;
-  END LOOP;
+    LEAVE loop_label;
+  END LOOP loop_label;
 END$$ 
