@@ -11,7 +11,7 @@ CONTAINS SQL
 BEGIN
   DECLARE uweight INT;
   DECLARE weightSum INT;
-  DECLARE i INT DEFAULT 0; 
+  DECLARE i, j INT DEFAULT 0; 
   DECLARE len INT;
   DECLARE user_id INT;
 
@@ -19,7 +19,9 @@ BEGIN
   SELECT COUNT(id) INTO len FROM users;
 
   label1: LOOP
-  SELECT id INTO user_id FROM users LIMIT i, i + 1;
+  SET i = j; 
+  set j = j + 1;
+  SELECT id INTO user_id FROM users LIMIT i, j;
 
   SELECT SUM(projects.weight * corrections.score) INTO weightSum FROM users 
   INNER JOIN corrections
@@ -32,7 +34,6 @@ BEGIN
   WHERE 
   id = user_id;
 
-  SET i = i + 1;
   IF i >= len
     THEN
     LEAVE label1;
