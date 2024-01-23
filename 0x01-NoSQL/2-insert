@@ -1,3 +1,2 @@
 // insert a value to NoSQL database collection
-
-db.school.insertOne({"name": "Holberton school"})
+db.school.bulkWrite([{insertOne: {"document": {"name": "Holberton school"}}}])
