@@ -31,7 +31,7 @@ def call_history(f: Callable) -> Callable:
             self._redis.rpush("{}:inputs".format(f.__qualname__), str(args))
         f_out = f(self, *args, **kwargs)
         if isinstance(self._redis, redis.Redis):
-            self._redis.lpush("{}:outputs".format(f.__qualname__), str(f_out))
+            self._redis.lpush("{}:outputs".format(f.__qualname__), f_out)
         return f_out
     return wrapper
 
@@ -53,7 +53,7 @@ class Cache:
         args:
             data (str|float|int|bytes): value to store in redis database
         """
-        key: str = str(uuid.uuid4())
+        key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
 
@@ -68,8 +68,8 @@ class Cache:
 
     def get_int(self, key: str) -> int:
         """return get with function as int"""
-        return self.get(key, int)
+        return self.get(key, lambda val: int(val))
 
     def get_str(self, key: str) -> int:
         """return get with function as int"""
-        return self.get(key, str)
+        return self.get(key, lambda val: val.decode("utf-8"))
