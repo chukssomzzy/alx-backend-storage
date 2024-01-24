@@ -2,7 +2,7 @@
 """redis Cache class
 """
 
-from typing import Callable, Optional, Union
+from typing import Any, Callable, Optional, Union
 import redis
 import uuid
 from functools import wraps
@@ -13,7 +13,7 @@ def count_calls(f: Callable) -> Callable:
     initialized
     """
     @wraps(f)
-    def wrapper(self, *args, **kwargs) -> Callable:
+    def wrapper(self, *args, **kwargs) -> Any:
         """Wraps function passed to count_calls"""
         if isinstance(self._redis, redis.Redis):
             self._redis.incr(f.__qualname__, 1)
