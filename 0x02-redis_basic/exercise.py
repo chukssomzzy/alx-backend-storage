@@ -36,3 +36,11 @@ class Cache:
         if fn:
             value = fn(value)
         return value
+
+    def get_int(self, key: str) -> int:
+        """return get with function as int"""
+        return self.get(key, int)
+
+    def get_str(self, key: str) -> int:
+        """return get with function as int"""
+        return self.get(key, str)
