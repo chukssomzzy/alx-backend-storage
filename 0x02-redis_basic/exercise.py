@@ -2,21 +2,37 @@
 """redis Cache class
 """
 
+import functools
 from typing import Any, Callable, Optional, Union
 import redis
 import uuid
-from functools import wraps
 
 
 def count_calls(f: Callable) -> Callable:
     """decorator to track how many times Cache has been
     initialized
     """
-    @wraps(f)
+    @functools.wraps(f)
     def wrapper(self, *args, **kwargs) -> Any:
         """Wraps function passed to count_calls"""
-        self._redis.incr(f.__qualname__, 1)
+        if isinstance(self._redis, redis.Redis):
+            self._redis.incr(f.__qualname__, 1)
         return f(self, *args, **kwargs)
+    return wrapper
+
+
+def call_history(f: Callable) -> Callable:
+    """Cache calls history
+    """
+    @functools.wraps(f)
+    def wrapper(self, *args, **kwargs) -> Any:
+        """Wrapper that function returns and execute the function"""
+        if isinstance(self._redis, redis.Redis):
+            self._redis.rpush(f"{f.__qualname__}:inputs", str(args))
+        f_out = f(self, *args, **kwargs)
+        if isinstance(self._redis, redis.Redis):
+            self._redis.lpush(f"{f.__qualname__}:outputs", str(f_out))
+        return f_out
     return wrapper
 
 
@@ -30,6 +46,7 @@ class Cache:
         self._redis: redis.Redis = redis.Redis()
         self._redis.flushdb()
 
+    @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """takes a data and return a key
