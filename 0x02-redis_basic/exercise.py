@@ -2,9 +2,11 @@
 """redis Cache class
 """
 
-from typing import Union
+from typing import Callable, Optional, Union
 import redis
 import uuid
+
+from redis.commands.core import ResponseT
 
 
 class Cache:
@@ -25,3 +27,12 @@ class Cache:
         key: str = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
+
+    def get(self, key: str,
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
+        """ Get an value for the provided key
+        """
+        value = self._redis.get(key)
+        if fn:
+            value = fn(value)
+        return value
