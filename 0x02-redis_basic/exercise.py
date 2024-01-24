@@ -20,4 +20,5 @@ class Cache:
         if type(data) in self.data_types:
             key = str(uuid.uuid4())
             self._redis.set(key, data)
+            self._redis.bgsave()
             return key
