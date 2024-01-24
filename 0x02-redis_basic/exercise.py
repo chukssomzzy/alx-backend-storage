@@ -19,6 +19,6 @@ class Cache:
         args:
             data (str|float|int|bytes): value to store in redis database
         """
-        key = str(uuid.uuid4())
+        key: str = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
