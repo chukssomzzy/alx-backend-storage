@@ -6,8 +6,6 @@ from typing import Callable, Optional, Union
 import redis
 import uuid
 
-from redis.commands.core import ResponseT
-
 
 class Cache:
     """Redis cache implementation
