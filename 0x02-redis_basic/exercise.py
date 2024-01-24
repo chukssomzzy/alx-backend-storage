@@ -3,9 +3,10 @@
 """
 
 import functools
-from typing import Any, Callable, Optional, Union
-import redis
 import uuid
+from typing import Any, Callable, Optional, Union
+
+import redis
 
 
 def count_calls(f: Callable) -> Callable:
