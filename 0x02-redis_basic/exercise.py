@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""redis Cache class"""
+"""redis Cache class
+"""
 
 from typing import Union
 import redis
@@ -7,13 +8,14 @@ import uuid
 
 
 class Cache:
-    """Redis cache implementation"""
+    """Redis cache implementation
+    """
 
     def __init__(self) -> None:
         """setup cache instance
         """
         self._redis: redis.Redis = redis.Redis()
-        self._redis.flushdb(True)
+        self._redis.flushdb()
 
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """takes a data and return a key
