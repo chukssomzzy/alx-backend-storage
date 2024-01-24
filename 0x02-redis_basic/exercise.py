@@ -10,7 +10,7 @@ class Cache:
     """Redis cache"""
     data_types = [str, float, int, bytes]
 
-    def __init__(self):
+    def __init__(self) -> None:
         """setup cache"""
         self._redis: redis.Redis = redis.Redis()
         self._redis.flushdb()
