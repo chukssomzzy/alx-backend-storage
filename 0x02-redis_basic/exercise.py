@@ -28,10 +28,10 @@ def call_history(f: Callable) -> Callable:
     def wrapper(self, *args, **kwargs) -> Any:
         """Wrapper that function returns and execute the function"""
         if isinstance(self._redis, redis.Redis):
-            self._redis.rpush(f"{f.__qualname__}:inputs", str(args))
+            self._redis.rpush("{}:inputs".format(f.__qualname__), str(args))
         f_out = f(self, *args, **kwargs)
         if isinstance(self._redis, redis.Redis):
-            self._redis.lpush(f"{f.__qualname__}:outputs", str(f_out))
+            self._redis.lpush("{}:outputs".format(f.__qualname__), str(f_out))
         return f_out
     return wrapper
 
