@@ -15,10 +15,10 @@ class Cache:
         self._redis: redis.Redis = redis.Redis()
         self._redis.flushdb()
 
-    def store(self, data: Union[str, float, int, bytes]) -> Union[str, None]:
+    def store(self, data: Union[str, float, int, bytes]) -> str:
         """takes a data and return a key"""
+        key = ""
         if type(data) in self.data_types:
             key = str(uuid.uuid4())
             self._redis.set(key, data)
-            self._redis.bgsave()
-            return key
+        return key
