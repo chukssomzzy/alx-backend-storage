@@ -13,6 +13,5 @@ if __name__ == "__main__":
     print(f"    method PUT: {nginx.count_documents({'method': 'PUT'})}")
     print(f"    method PATCH: {nginx.count_documents({'method': 'PATCH'})}")
     print(f"    method DELETE: {nginx.count_documents({'method': 'DELETE'})}")
-    sum = nginx.count_documents({'method': 'GET'}) + \
-        nginx.count_documents({'path': '/status'})
+    sum = nginx.count_documents({'method': 'GET', 'path': '/status'})
     print(f"{sum} status check")
