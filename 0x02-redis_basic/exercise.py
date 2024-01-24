@@ -5,6 +5,19 @@
 from typing import Callable, Optional, Union
 import redis
 import uuid
+from functools import wraps
+
+
+def count_calls(f: Callable) -> Callable:
+    """decorator to track how many times Cache has been
+    initialized
+    """
+    @wraps(f)
+    def wrapper(self, *args, **kwargs) -> Callable:
+        """Wraps function passed to count_calls"""
+        self._redis.incrby(f.__qualname__, 1)
+        return f(self, *args, **kwargs)
+    return wrapper
 
 
 class Cache:
@@ -17,6 +30,7 @@ class Cache:
         self._redis: redis.Redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """takes a data and return a key
         args:
