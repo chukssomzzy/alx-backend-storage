@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """redis Cache class"""
 
-from typing import Union
+from typing import Any, Callable, Union
 import redis
 import uuid
+
+from redis.commands.core import ResponseT
 
 
 class Cache:
@@ -25,3 +27,18 @@ class Cache:
             key = str(uuid.uuid4())
             self._redis.set(key, data)
         return key
+
+    def get(self, key: str, fn: Callable) -> Any:
+        """get an item from redis cache"""
+        value: ResponseT = self._redis.get(key)
+        if value:
+            value = fn(value)
+        return value
+
+    def get_int(self, key: str) -> int:
+        """Paramitarize Cache.get with the correct function"""
+        return self.get(key, int)
+
+    def get_str(self, key: str) -> str:
+        """Paramitarize Cache.get with the correct convertion function """
+        return self.get(key, str)
