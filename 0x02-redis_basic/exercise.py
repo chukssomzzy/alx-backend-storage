@@ -40,7 +40,6 @@ def call_history(f: Callable) -> Callable:
 class Cache:
     """Redis cache implementation
     """
-
     def __init__(self) -> None:
         """setup cache instance
         """
