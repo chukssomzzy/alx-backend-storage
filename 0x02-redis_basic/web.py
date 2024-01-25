@@ -9,10 +9,12 @@ from typing import Callable
 import redis
 import requests
 
+r = redis.Redis()
+""" One time connection"""
+
 
 def track(method: Callable) -> Callable:
     """Cache return and url"""
-    r = redis.Redis()
 
     @functools.wraps(method)
     def wrapper(url: str) -> str:
