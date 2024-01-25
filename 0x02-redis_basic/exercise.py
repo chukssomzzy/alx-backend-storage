@@ -19,7 +19,7 @@ def replay(fn: Callable) -> None:
 
     out = r.lrange(key_out, 0, -1)
     hj = r.lrange(key_in, 0, -1)
-    print("{} was call {} times:".format(fn.__qualname__, len(out)))
+    print("{} was called {} times:".format(fn.__qualname__, len(out)))
     for i, o in zip(hj, out):
         print("{}(*{}) -> {}".format(fn.__qualname__, i.decode("utf-8"),
                                      o.decode("utf-8")))
