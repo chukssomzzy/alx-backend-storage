@@ -21,18 +21,19 @@ def count_calls(method: Callable) -> Callable:
     return wrapper
 
 
-def call_history(f: Callable) -> Callable:
+def call_history(method: Callable) -> Callable:
     '''Cache calls history.
     '''
-    @functools.wraps(f)
+    @functools.wraps(method)
     def wrapper(self, *args, **kwargs) -> Any:
         '''Wrapper that function returns and execute the function.
         '''
         if isinstance(self._redis, redis.Redis):
-            self._redis.rpush("{}:inputs".format(f.__qualname__), str(args))
-        f_out = f(self, *args, **kwargs)
+            self._redis.rpush("{}:inputs".format(method.__qualname__),
+                              str(args))
+        f_out = method(self, *args, **kwargs)
         if isinstance(self._redis, redis.Redis):
-            self._redis.lpush("{}:outputs".format(f.__qualname__), f_out)
+            self._redis.lpush("{}:outputs".format(method.__qualname__), f_out)
         return f_out
     return wrapper
 
