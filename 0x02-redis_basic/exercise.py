@@ -38,22 +38,22 @@ def call_history(f: Callable) -> Callable:
 
 
 class Cache:
-    '''Represents an object for storing data in a Redis data storage.
+    '''Redis cache implementation.
     '''
     def __init__(self) -> None:
-        '''Initializes a Cache instance.
+        '''setup cache instance
         '''
         self._redis = redis.Redis()
-        self._redis.flushdb(True)
+        self._redis.flushdb()
 
     @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
-        '''Stores a value in a Redis data storage and returns the key.
+        '''takes a data and return a key  value to store in redis database.
         '''
-        data_key = str(uuid.uuid4())
-        self._redis.set(data_key, data)
-        return data_key
+        key = str(uuid.uuid4())
+        self._redis.set(key, data)
+        return key
 
     def get(self, key: str,
             fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
