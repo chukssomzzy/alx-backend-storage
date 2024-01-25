@@ -24,6 +24,7 @@ def track(method: Callable) -> Callable:
         if res:
             return res.decode('utf-8')
         res = method(url)
+        r.set(f"count:{url}", 0)
         r.setex(f"result:{url}", timedelta(seconds=10), res)
         return res
     return wrapper
