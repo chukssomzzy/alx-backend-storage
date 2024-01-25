@@ -9,15 +9,15 @@ from typing import Any, Callable, Optional, Union
 import redis
 
 
-def count_calls(f: Callable) -> Callable:
+def count_calls(method: Callable) -> Callable:
     '''decorator to track how many times Cache has been initialized.
     '''
-    @functools.wraps(f)
+    @functools.wraps(method)
     def wrapper(self, *args, **kwargs) -> Any:
         '''Wraps function passed to count_calls'''
         if isinstance(self._redis, redis.Redis):
-            self._redis.incr(f.__qualname__)
-        return f(self, *args, **kwargs)
+            self._redis.incr(method.__qualname__)
+        return method(self, *args, **kwargs)
     return wrapper
 
 
