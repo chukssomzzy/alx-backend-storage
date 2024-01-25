@@ -15,16 +15,15 @@ def track(f: Callable) -> Callable:
     r = redis.Redis()
 
     @functools.wraps(f)
-    def wrapper(url, *args, **kwargs):
+    def wrapper(url, *args, **kwargs) -> str:
         """Cache return in redis"""
-        k = "count:{}".format(url)
-        k_cache = "cache:{}".format(url)
-        r.incr(k)
-        if r.exists(k_cache):
-            return r.get(k_cache).decode('utf-8')
-        ret = f(url, *args, **kwargs)
-        r.setex(k_cache, timedelta(seconds=10), ret)
-        return ret
+        r.incr(f"count:{url}")
+        res = r.get(f"result:{url}")
+        if res:
+            return res.decode('utf-8')
+        res = f(url, *args, **kwargs)
+        r.setex(f"result:{url}", timedelta(seconds=10), res)
+        return res
     return wrapper
 
 
