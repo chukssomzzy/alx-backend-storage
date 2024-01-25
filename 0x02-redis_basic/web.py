@@ -17,7 +17,7 @@ def track(method: Callable) -> Callable:
     """Cache return and url"""
 
     @functools.wraps(method)
-    def wrapper(url: str) -> str:
+    def wrapper(url) -> str:
         """Cache return in redis"""
         r.incr(f"count:{url}")
         res = r.get(f"result:{url}")
