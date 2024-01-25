@@ -9,6 +9,22 @@ from typing import Any, Callable, Optional, Union
 import redis
 
 
+def replay(fn: Callable) -> None:
+    """Replace
+    """
+    r = redis.Redis()
+
+    key_in = "{}:inputs".format(fn.__qualname__)
+    key_out = "{}:outputs".format(fn.__qualname__)
+
+    out = r.lrange(key_out, 0, -1)
+    hj = r.lrange(key_in, 0, -1)
+    print("{} was call {} times:".format(fn.__qualname__, len(out)))
+    for i, o in zip(hj, out):
+        print("{}(*{}) -> {}".format(fn.__qualname__, i.decode("utf-8"),
+                                     o.decode("utf-8")))
+
+
 def count_calls(method: Callable) -> Callable:
     '''decorator to track how many times Cache has been initialized.
     '''
