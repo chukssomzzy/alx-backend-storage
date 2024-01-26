@@ -19,13 +19,13 @@ def track(method: Callable) -> Callable:
     @functools.wraps(method)
     def wrapper(url) -> str:
         """Cache return in redis"""
-        r.incr(f"count:{url}")
-        res = r.get(f"result:{url}")
+        r.incr("count:{}".format(url))
+        res = r.get("result:{}".format(url))
         if res:
             return res.decode('utf-8')
         res = method(url)
-        r.set(f"count:{url}", 0)
-        r.setex(f"result:{url}", timedelta(seconds=10), res)
+        r.set("count:{}".format(url), 0)
+        r.setex("result:{}".format(url), timedelta(seconds=10), res)
         return res
     return wrapper
 
@@ -34,5 +34,5 @@ def track(method: Callable) -> Callable:
 def get_page(url: str) -> str:
     """Get a page and cache if neccessary.
     """
-    r = requests.get(url)
-    return (r.content.decode("utf-8"))
+    r = requests.get(url).text
+    return (r)
