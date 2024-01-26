@@ -34,5 +34,4 @@ def track(method: Callable) -> Callable:
 def get_page(url: str) -> str:
     """Get a page and cache if neccessary.
     """
-    r = requests.get(url).text
-    return (r)
+    return requests.get(url).text
