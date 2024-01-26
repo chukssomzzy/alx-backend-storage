@@ -11,7 +11,7 @@ def top_ten(col):
             "$group": {
                 "_id": "$ip",
                 "appeared": {
-                    "$count": {}
+                    "$sum": 1
                 }
             }
         },
